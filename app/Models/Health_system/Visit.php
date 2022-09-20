@@ -30,7 +30,8 @@ class Visit extends Model
         'diagnosis_id',
         'ms_id',
         'labtest_id',
-        'xray_id'
+        'xray_id',
+        'mp_id',
 
     ];
 

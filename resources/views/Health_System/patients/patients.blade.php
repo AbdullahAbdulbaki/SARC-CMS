@@ -72,6 +72,7 @@
                         <th>Gender</th>
                         <th>File Number</th>
                         <th>Registration Date</th>
+                        <th>Full Code</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -85,6 +86,7 @@
                         <td>{{ $Patient->Gender }}</td>
                         <td>{{$Patient->file_id}}</td>
                         <td>{{$Patient->registration_date}}</td>
+                        <td>{{$Patient->fullcode}}</td>
 
                         <td>
                           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

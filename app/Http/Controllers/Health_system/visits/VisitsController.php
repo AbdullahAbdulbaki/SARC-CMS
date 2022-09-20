@@ -21,7 +21,9 @@ class VisitsController extends Controller
     // Get All Programs
     Public function visits_read()
     {
-        $visits = Visit::orderBy('id')->get();
+        $visits = Visit::Where('mp_id','=',function ($query){
+            $query->selectRaw('mp_id')->from('users')->where('id','=',auth()->user()->id);
+        })->get();
         return view('Health_System.visits.visits',compact('visits'));
     }
     //show Program Info By ID
@@ -80,6 +82,7 @@ class VisitsController extends Controller
                 'labtest_id' => $request->labtest_id,
                 'xray_id' => $request->xray_id,
                 'patient_id' =>$request->id,
+                'mp_id'=> auth()->user()->mp_id,
             ]);
 
             return redirect('/visits/all')->with(['success'=> 'visits added successfully']) ;

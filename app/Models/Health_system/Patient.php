@@ -41,6 +41,7 @@ class Patient extends Model
         'document_id',
         'document_type',
         'unhcr_number',
+        'fullcode',
 
     ];
 

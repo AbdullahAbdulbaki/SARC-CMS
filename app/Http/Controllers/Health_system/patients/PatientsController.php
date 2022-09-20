@@ -72,8 +72,10 @@ class PatientsController extends Controller
 
 
 
+
     public function Patients_store(Request $request)
     {
+
 
 
     switch ($request->input('action')) {
@@ -112,9 +114,10 @@ class PatientsController extends Controller
                 'new_city_id'=> $request->new_city_id,
                 'new_area_id'=> $request->new_area_id,
                 'mp_id'=> auth()->user()->mp_id,
+                'fullcode'=>auth()->user()->medicalpoint->en_name,
+
 
             ]);
-
             return redirect('/patients/all')->with(['success'=> 'Patients added successfully']) ;
 
             break;
