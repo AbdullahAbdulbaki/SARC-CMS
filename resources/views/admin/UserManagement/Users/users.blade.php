@@ -69,6 +69,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Medical Point</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -80,6 +81,7 @@
                         <td>{{ $user->email }}</td>
 
                         <td>{{ $user->role->name }}</td>
+                        <td>@if($user->mp_id != Null){{ $user->medicalpoint->en_name }} @else{{ Null }}@endif</td>
 
 
                         <td>

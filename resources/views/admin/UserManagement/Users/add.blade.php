@@ -13,7 +13,8 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('/img/sarc.png') }}" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="{{ asset('/img/sarc.png') }}" alt="AdminLTELogo" height="60"
+                width="60">
         </div>
         <!--navbar-->
         @include('admin.layouts.navbar')
@@ -78,6 +79,20 @@
                                         @endforeach
                                     </select>
                                     @error('role_id')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <!-- /.form group -->
+                                <div class="form-group">
+                                    <label>Medical Point</label>
+                                    <select name="mp_id" id="select_mp" class="form-control my-colorpicker1"
+                                        required foccus>
+                                        <option value="" disabled selected>Please Select Medical Point</option>
+                                        @foreach ($mps as $mp)
+                                            <option value="{{ $mp->id }}">{{ $mp->en_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('mp_id')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

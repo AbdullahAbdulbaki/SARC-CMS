@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UserManagement\Users;;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\MedicalPoint;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +33,8 @@ class UsersController extends Controller
     {
         $users = User::orderBy('id')->get();
         $roles=Role::all();
-        return view ('admin.UserManagement.Users.add',compact('users','roles'));
+        $mps=MedicalPoint::all();
+        return view ('admin.UserManagement.Users.add',compact('users','roles','mps'));
     }
 
     public function users_store(Request $request)
@@ -53,6 +55,7 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role_id' => $request->role_id,
+            'mp_id' =>$request->mp_id,
             'password' => Hash::make($request['password']),
         ]);
         return redirect('/users/all')->with(['success'=> 'user added successfully']) ;
@@ -91,8 +94,9 @@ class UsersController extends Controller
     {
         $users =User::find($id);
         $roles=Role::all();
+        $mps=MedicalPoint::all();
 
-        return view ('admin.UserManagement.Users.edit',compact('users','roles'));
+        return view ('admin.UserManagement.Users.edit',compact('users','roles','mps'));
     }
 
     Public function update_user(Request $request)
@@ -101,6 +105,7 @@ class UsersController extends Controller
         $users->name = $request->name;
         $users->email = $request->email;
         $users->role_id = $request->role_id;
+        $users->mp_id = $request->mp_id;
         $users->password =Hash::make($request['password']);
         $users->save();
         return redirect('/users/all')->with('success','User Information updated Successfully');

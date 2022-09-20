@@ -17,6 +17,7 @@ use App\Models\Health_system\Visit;
 use App\Models\Labtest;
 use App\Models\Medical_services;
 use App\Models\Nationality;
+use App\Models\User;
 use App\Models\Xray;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,9 @@ class PatientsController extends Controller
     // Get All Programs
     Public function Patients_read()
     {
-        $Patients = Patient::orderBy('id')->get();
+        $Patients = Patient::Where('mp_id','=',function ($query){
+            $query->selectRaw('mp_id')->from('users')->where('id','=',auth()->user()->id);
+        })->get();
         return view('Health_System.Patients.Patients',compact('Patients'));
     }
     //show Program Info By ID
@@ -44,7 +47,7 @@ class PatientsController extends Controller
 
         // Add new Programs
         Public function file_patients($id)
-        { 
+        {
             $Patients = Patient::orderBy('id')->get();
             $nationalities=Nationality::all();
             $disablities=Disablity::all();
@@ -108,7 +111,7 @@ class PatientsController extends Controller
                 'old_area_id'=> $request->old_area_id,
                 'new_city_id'=> $request->new_city_id,
                 'new_area_id'=> $request->new_area_id,
-
+                'mp_id'=> auth()->user()->mp_id,
 
             ]);
 
@@ -150,6 +153,7 @@ class PatientsController extends Controller
                 'old_area_id'=> $request->old_area_id,
                 'new_city_id'=> $request->new_city_id,
                 'new_area_id'=> $request->new_area_id,
+                'mp_id'=> auth()->user()->mp_id,
 
 
             ]);

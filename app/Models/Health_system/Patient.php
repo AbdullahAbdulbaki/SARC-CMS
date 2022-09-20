@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Nationality;
 use App\Models\Disablity;
 use App\Models\Document;
+use App\Models\MedicalPoint;
 
 class Patient extends Model
 {
@@ -30,6 +31,7 @@ class Patient extends Model
         'file_id',
         'Gender',
         'is_disablity',
+        'mp_id',
         'is_displaced',
         'old_city_id',
         'old_area_id',
@@ -46,6 +48,11 @@ class Patient extends Model
     public function nationality()
     {
         return $this->belongsTo(Nationality::class);
+    }
+
+    public function medicalpoint()
+    {
+        return $this->belongsTo(MedicalPoint::class,'mp_id');
     }
 
     public function disablity()

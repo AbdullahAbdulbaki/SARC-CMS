@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use App\Models\Role;
+use App\Models\MedicalPoint;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
@@ -25,11 +26,17 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'mp_id',
     ];
 
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function medicalpoint()
+    {
+        return $this->belongsTo(MedicalPoint::class,'mp_id');
     }
 
     /**
